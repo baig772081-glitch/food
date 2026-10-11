@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komorebi Spice Cafe & Bistro - Anime Cafe Menu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        matcha: {
+                            50: '#f4f8f3',
+                            100: '#e5f0e3',
+                            200: '#cae1c7',
+                            500: '#7ca97e',
+                            600: '#5e8d61',
+                            700: '#4a6f4d',
+                        },
+                        sakura: {
+                            50: '#fff5f7',
+                            100: '#ffe3eb',
+                            200: '#fcc8d8',
+                            400: '#f687a7',
+                            500: '#ec5d87',
+                        },
+                        cream: {
+                            50: '#fdfbf7',
+                            100: '#f7f2e8',
+                            200: '#eedfcc',
+                        },
+                        cafe: {
+                            light: '#a67c52',
+                            DEFAULT: '#6f4e37',
+                            dark: '#4a3324',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        japanese: ['Zen Maru Gothic', 'sans-serif'],
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(3deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(236, 93, 135, 0.3)' },
+                            '50%': { boxShadow: '0 0 25px rgba(236, 93, 135, 0.6)' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9) translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        float: 'float 4s ease-in-out infinite',
+                        floatSlow: 'float 6s ease-in-out infinite alternate',
+                        pulseGlow: 'pulseGlow 2s infinite',
+                        popIn: 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f7f2e8;
+            background-image: radial-gradient(#e5f0e3 1.5px, transparent 1.5px), radial-gradient(#ffe3eb 1.5px, #f7f2e8 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: #4a3324;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f2e8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cae1c7;
+            border-radius: 999px;
+            border: 2px solid #f7f2e8;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7ca97e;
+        }
+
+        .manga-border {
+            border: 2px solid #4a3324;
+            box-shadow: 4px 4px 0px #4a3324;
+        }
+        .manga-border-sm {
+            border: 2px solid #4a3324;
+            box-shadow: 2px 2px 0px #4a3324;
+        }
+        .manga-border-hover {
+            transition: all 0.2s ease;
+        }
+        .manga-border-hover:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #4a3324;
+        }
+        .manga-border-hover:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #4a3324;
+        }
+
+        .kawaii-badge {
+            clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased text-cafe-dark selection:bg-sakura-200 selection:text-cafe-dark pb-28">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-cream-50/90 backdrop-blur-md border-b-2 border-cafe-dark shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-11 h-11 bg-matcha-500 rounded-2xl flex items-center justify-center manga-border text-white text-2xl animate-float">
+                    🍵
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="font-display font-bold text-xl sm:text-2xl text-cafe-dark tracking-wide">Komorebi Spice</span>
+                        <span class="font-japanese text-xs px-2 py-0.5 bg-sakura-100 text-sakura-500 rounded-full font-bold border border-sakura-200 hidden sm:inline-block">木漏れ日</span>
+                    </div>
+                    <p class="text-xs text-cafe-light font-medium">Royal Japanese-Indian Fusion Bistro & Cafe</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Info & Audio Toggle -->
+            <div class="flex items-center space-x-3">
+                <button id="soundToggle" onclick="toggleSound()" class="p-2.5 bg-matcha-100 rounded-xl manga-border-sm hover:bg-matcha-200 text-cafe-dark transition flex items-center gap-1.5 text-xs font-bold" title="Toggle Audio Sound FX">
+                    <i class="fa-solid fa-volume-high text-matcha-700" id="soundIcon"></i>
+                    <span class="hidden md:inline">SFX On</span>
+                </button>
+                <div class="hidden lg:flex items-center gap-2 text-xs font-semibold bg-cream-100 px-3 py-1.5 rounded-xl border border-cream-200">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Kitchen Open • 11:30 AM - 11:00 PM</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+        <div class="bg-gradient-to-r from-matcha-100 via-cream-100 to-sakura-100 rounded-3xl p-6 sm:p-8 manga-border relative overflow-hidden">
+            <!-- Floating Decorative Background Elements -->
+            <div class="absolute -right-6 -bottom-6 text-8xl opacity-15 pointer-events-none select-none font-japanese">
+                桜カフェ
+            </div>
+            <div class="absolute right-12 top-4 text-4xl animate-float opacity-80 hidden md:block">
+                🍡
+            </div>
+            <div class="absolute left-1/2 bottom-2 text-3xl animate-floatSlow opacity-70 hidden md:block">
+                ✨
+            </div>
+
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-block px-3 py-1 bg-sakura-400 text-white font-display text-xs font-bold rounded-full manga-border-sm mb-3">
+                    🌸 Welcome to Manga Cafe Edition
+                </span>
+                <h1 class="font-display font-extrabold text-3xl sm:text-4xl text-cafe-dark leading-tight mb-2">
+                    A Cozy Fusion of Royal Spices & Cafe Comfort 🍛✨
+                </h1>
+                <p class="text-sm sm:text-base text-cafe-light font-medium mb-4">
+                    Explore our aromatic tandoors, creamy biryanis, and cozy matcha brews crafted with love. Tap any dish to view flavor profiles, spice meters, and order!
+                </p>
+                
+                <div class="flex flex-wrap gap-2 text-xs font-bold text-cafe-dark">
+                    <span class="bg-white/80 backdrop-blur px-3 py-1 rounded-xl border border-cafe-dark/20 flex items-center gap-1.5">
+                        <i class="fa-solid fa-leaf text-matcha-600"></i> 100% Pure Veg Options
+                    </span>
+                    <span class="bg-white/80 backdrop-blur px-3 py-1 rounded-xl border border-cafe-dark/20 flex items-center gap-1.5">
+                        <i class="fa-solid fa-pepper-hot text-sakura-500"></i> Custom Spice Levels
+                    </span>
+                    <span class="bg-white/80 backdrop-blur px-3 py-1 rounded-xl border border-cafe-dark/20 flex items-center gap-1.5">
+                        <i class="fa-solid fa-crown text-amber-500"></i> Royal Heritage Recipes
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Bar: Search & Diet Toggles -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sticky top-[69px] z-30 bg-cream-50/95 backdrop-blur border-b border-cream-200">
+        <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+            <!-- Instant Search Input -->
+            <div class="relative w-full md:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cafe-light"></i>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search dishes, ingredients, curry..." 
+                    class="w-full pl-10 pr-10 py-2.5 bg-white rounded-2xl manga-border-sm text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-matcha-500 transition placeholder:text-cafe-light/60">
+                <button id="clearSearch" onclick="clearSearchInput()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-cafe-light hover:text-cafe-dark">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Quick Dietary & Special Toggles -->
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-start md:justify-end">
+                <button onclick="toggleDietFilter('all')" id="filter-diet-all" 
+                    class="diet-btn px-3.5 py-1.5 rounded-xl text-xs font-bold manga-border-sm bg-cafe-dark text-white transition">
+                    All Dishes
+                </button>
+                <button onclick="toggleDietFilter('veg')" id="filter-diet-veg" 
+                    class="diet-btn px-3.5 py-1.5 rounded-xl text-xs font-bold manga-border-sm bg-white hover:bg-emerald-50 text-emerald-700 transition flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-emerald-700"></span> Pure Veg
+                </button>
+                <button onclick="toggleDietFilter('non-veg')" id="filter-diet-non-veg" 
+                    class="diet-btn px-3.5 py-1.5 rounded-xl text-xs font-bold manga-border-sm bg-white hover:bg-rose-50 text-rose-700 transition flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500 border border-rose-700"></span> Non-Veg
+                </button>
+                <button onclick="toggleChefSpecial()" id="filter-chef" 
+                    class="px-3.5 py-1.5 rounded-xl text-xs font-bold manga-border-sm bg-white hover:bg-amber-50 text-amber-800 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-star text-amber-500"></i> Chef's Choice
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Scroll Tabs -->
+        <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar pt-3 pb-1 mt-2 border-t border-cream-200/60">
+            <button onclick="selectCategory('all')" id="cat-tab-all" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-matcha-500 text-white">
+                ✨ All Menu
+            </button>
+            <button onclick="selectCategory('beverages')" id="cat-tab-beverages" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🍵 Opening Pour & Drinks
+            </button>
+            <button onclick="selectCategory('starters')" id="cat-tab-starters" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🍢 Tandoor & Starters
+            </button>
+            <button onclick="selectCategory('veg-mains')" id="cat-tab-veg-mains" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🥗 The Vegetarian Table
+            </button>
+            <button onclick="selectCategory('meats')" id="cat-tab-meats" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🍗 Poultry & Meats
+            </button>
+            <button onclick="selectCategory('biryani-breads')" id="cat-tab-biryani-breads" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🍛 Biryani & Artisanal Breads
+            </button>
+            <button onclick="selectCategory('desserts-sides')" id="cat-tab-desserts-sides" class="cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100">
+                🍨 Sweet Finale & Sides
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Menu Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1">
+        
+        <!-- Active Filter Indicator Bar -->
+        <div id="filterIndicator" class="hidden mb-4 p-3 bg-matcha-100 rounded-2xl border border-matcha-200 flex items-center justify-between text-xs font-bold text-matcha-700">
+            <span id="filterIndicatorText">Showing filtered results</span>
+            <button onclick="resetFilters()" class="text-cafe-dark underline hover:text-sakura-500">Reset All Filters</button>
+        </div>
+
+        <!-- Container for Rendered Category Sections & Dish Grid -->
+        <div id="menuContainer" class="space-y-10">
+            <!-- Dynamic JavaScript content will load here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden py-16 text-center">
+            <div class="text-6xl mb-3 animate-float">🍵 ( • ̀ω•́ )</div>
+            <h3 class="font-display text-xl font-bold text-cafe-dark">No yummy dishes found!</h3>
+            <p class="text-sm text-cafe-light mt-1">Try tweaking your search keywords or switching filter tabs.</p>
+            <button onclick="resetFilters()" class="mt-4 px-5 py-2 bg-sakura-400 text-white font-display text-xs font-bold rounded-2xl manga-border-sm hover:bg-sakura-500">
+                Reset Filters
+            </button>
+        </div>
+    </main>
+
+    <!-- Anime Style Interactive Pop-in Dish Detail Modal -->
+    <div id="dishModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cafe-dark/60 backdrop-blur-sm hidden">
+        <div class="bg-cream-50 w-full max-w-lg rounded-3xl manga-border p-6 relative animate-popIn overflow-hidden max-h-[90vh] flex flex-col">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-white rounded-full manga-border-sm flex items-center justify-center text-cafe-dark hover:bg-sakura-100 transition font-bold">
+                ✕
+            </button>
+
+            <div class="overflow-y-auto pr-1 space-y-4">
+                <!-- Image Header with Anime Floating Badges -->
+                <div class="relative h-56 rounded-2xl overflow-hidden manga-border-sm bg-cream-200">
+                    <img id="modalImg" src="" alt="Dish preview" class="w-full h-full object-cover">
+                    <div id="modalBadges" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                        <!-- Badges injected here -->
+                    </div>
+                    <div class="absolute bottom-3 right-3 bg-cream-50/90 backdrop-blur px-3 py-1 rounded-xl text-xs font-display font-extrabold text-cafe-dark manga-border-sm">
+                        🌸 Bistro Chef Crafted
+                    </div>
+                </div>
+
+                <!-- Title & Price Header -->
+                <div class="flex items-start justify-between gap-2">
+                    <div>
+                        <h2 id="modalTitle" class="font-display font-bold text-2xl text-cafe-dark leading-tight"></h2>
+                        <p id="modalJapanese" class="font-japanese text-xs font-bold text-matcha-600 mt-0.5"></p>
+                    </div>
+                    <span id="modalPrice" class="font-display font-extrabold text-2xl text-sakura-500 whitespace-nowrap"></span>
+                </div>
+
+                <!-- Description -->
+                <p id="modalDescription" class="text-xs sm:text-sm text-cafe-dark/80 leading-relaxed font-medium bg-white p-3.5 rounded-2xl border border-cream-200"></p>
+
+                <!-- Flavor Profile & Spice Meter -->
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                    <div class="bg-matcha-50 p-3 rounded-2xl border border-matcha-200">
+                        <span class="text-[10px] font-bold tracking-wider text-matcha-700 uppercase block mb-1">Flavor Notes</span>
+                        <div id="modalFlavors" class="text-xs font-semibold text-cafe-dark flex flex-wrap gap-1">
+                            <!-- Flavors loaded dynamically -->
+                        </div>
+                    </div>
+                    <div class="bg-sakura-50 p-3 rounded-2xl border border-sakura-200">
+                        <span class="text-[10px] font-bold tracking-wider text-sakura-500 uppercase block mb-1">Spice Meter</span>
+                        <div id="modalSpiceMeter" class="flex items-center gap-1 text-xs font-bold text-cafe-dark">
+                            <!-- Spice indicator loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preparation Time & Serving Size -->
+                <div class="flex items-center justify-between text-xs text-cafe-light font-bold px-2">
+                    <span><i class="fa-regular fa-clock text-matcha-600 mr-1"></i> Prep Time: ~15-20 mins</span>
+                    <span><i class="fa-solid fa-utensils text-sakura-400 mr-1"></i> Freshly Made to Order</span>
+                </div>
+
+                <!-- Add to Wishlist Counter Action -->
+                <div class="pt-3 border-t border-cream-200 flex items-center justify-between gap-4">
+                    <div class="flex items-center bg-cream-100 rounded-2xl manga-border-sm p-1">
+                        <button onclick="adjustModalQty(-1)" class="w-8 h-8 rounded-xl bg-white text-cafe-dark font-bold text-lg flex items-center justify-center hover:bg-cream-200">-</button>
+                        <span id="modalQty" class="w-10 text-center font-display font-bold text-base text-cafe-dark">1</span>
+                        <button onclick="adjustModalQty(1)" class="w-8 h-8 rounded-xl bg-white text-cafe-dark font-bold text-lg flex items-center justify-center hover:bg-cream-200">+</button>
+                    </div>
+                    <button id="modalAddBtn" onclick="confirmAddModalToOrder()" class="flex-1 py-3 bg-matcha-500 hover:bg-matcha-600 text-white font-display font-bold rounded-2xl manga-border-sm transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Wishlist Tray
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Bottom Order Wishlist Tray -->
+    <div id="wishlistTray" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-2xl bg-cream-50/95 backdrop-blur-md rounded-3xl manga-border p-3.5 flex items-center justify-between shadow-2xl transition-all duration-300">
+        <div class="flex items-center space-x-3">
+            <div class="relative">
+                <div class="w-11 h-11 bg-sakura-400 text-white rounded-2xl flex items-center justify-center text-xl manga-border-sm">
+                    🍱
+                </div>
+                <span id="trayCount" class="absolute -top-2 -right-2 bg-cafe-dark text-white font-display text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-cafe-light">Your Cafe Order Tray</p>
+                <div class="flex items-baseline gap-2">
+                    <span id="trayTotal" class="font-display font-extrabold text-lg text-cafe-dark">₹0</span>
+                    <span id="trayItemsSummary" class="text-xs text-cafe-light font-medium truncate max-w-[150px] sm:max-w-xs">No items added yet</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <button onclick="openWishlistModal()" class="px-4 py-2.5 bg-matcha-500 hover:bg-matcha-600 text-white font-display text-xs sm:text-sm font-bold rounded-2xl manga-border-sm transition flex items-center gap-2">
+                <span>View Order</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Order Summary Modal -->
+    <div id="orderSummaryModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cafe-dark/60 backdrop-blur-sm hidden">
+        <div class="bg-cream-50 w-full max-w-md rounded-3xl manga-border p-6 relative animate-popIn max-h-[85vh] flex flex-col">
+            <button onclick="closeOrderModal()" class="absolute top-4 right-4 z-10 w-8 h-8 bg-white rounded-full manga-border-sm flex items-center justify-center text-cafe-dark font-bold hover:bg-sakura-100">
+                ✕
+            </button>
+
+            <div class="flex items-center space-x-2 mb-4">
+                <span class="text-2xl">✨</span>
+                <h3 class="font-display font-bold text-xl text-cafe-dark">Your Cute Order Summary</h3>
+            </div>
+
+            <!-- Cart Items List Container -->
+            <div id="orderItemsList" class="flex-1 overflow-y-auto space-y-2.5 my-2 pr-1">
+                <!-- Dynamically populated cart items -->
+            </div>
+
+            <!-- Calculation Breakdown -->
+            <div class="pt-4 border-t border-cream-200 space-y-1.5 text-xs font-semibold text-cafe-dark">
+                <div class="flex justify-between">
+                    <span class="text-cafe-light">Subtotal</span>
+                    <span id="orderSubtotal">₹0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-cafe-light">Gourmet Cafe Service (5%)</span>
+                    <span id="orderTax">₹0</span>
+                </div>
+                <div class="flex justify-between text-base font-display font-extrabold text-sakura-500 pt-2 border-t border-cream-200">
+                    <span>Total Estimated</span>
+                    <span id="orderGrandTotal">₹0</span>
+                </div>
+            </div>
+
+            <button onclick="sendOrderNotice()" class="mt-5 w-full py-3 bg-sakura-400 hover:bg-sakura-500 text-white font-display font-bold rounded-2xl manga-border-sm transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-heart"></i> Send Order to Bistro Kitchen
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive Royal Spice Menu converted into Anime Cafe / Bistro Style
+        const menuData = [
+            // Opening Pour & Drinks
+            {
+                id: "b1",
+                category: "beverages",
+                name: "Sparkling Berry Blossom Cooler",
+                japaneseName: "ベリーベリーソーダ",
+                price: 180,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
+                description: "A refreshing effervescent cooler infused with sweet wild berries, crushed mint leaves, and a touch of sakura essence.",
+                flavors: ["Refreshing", "Fruity", "Cool"],
+                spiceLevel: 0
+            },
+            {
+                id: "b2",
+                category: "beverages",
+                name: "Matcha Spiced Mango Lassi",
+                japaneseName: "抹茶マンゴーラッシー",
+                price: 190,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80",
+                description: "Rich Alphonso mango pulp blended with silky probiotic yogurt and topped with a dusting of fine Uji matcha powder.",
+                flavors: ["Creamy", "Tropical", "Matcha Blend"],
+                spiceLevel: 0
+            },
+            {
+                id: "b3",
+                category: "beverages",
+                name: "Royal Cardamom Kulhad Chai",
+                japaneseName: "ロイヤルチャイ",
+                price: 120,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80",
+                description: "Slow-brewed artisanal black tea boiled with whole green cardamom, ginger, and caramelized whole milk in a clay cup.",
+                flavors: ["Aromatic", "Warm", "Spiced"],
+                spiceLevel: 1
+            },
+
+            // Tandoor & Starters
+            {
+                id: "s1",
+                category: "starters",
+                name: "Kawaii Paneer Tikka Skewers",
+                japaneseName: "パニールティッカ串",
+                price: 360,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=600&q=80",
+                description: "Cubes of house-made cottage cheese marinated in hung curd, Kashmiri chili, and roasted cumin, charred in our clay tandoor.",
+                flavors: ["Smoky", "Tangy", "Savory"],
+                spiceLevel: 2
+            },
+            {
+                id: "s2",
+                category: "starters",
+                name: "Golden Charred Tandoori Murgh",
+                japaneseName: "タンドリーチキン",
+                price: 440,
+                type: "non-veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
+                description: "Bone-in chicken marinated for 24 hours in spicy yogurt sauce, flame-roasted until tender with lemon butter drizzle.",
+                flavors: ["Juicy", "Fiery", "Smoky"],
+                spiceLevel: 3
+            },
+            {
+                id: "s3",
+                category: "starters",
+                name: "Crispy Lotus Root & Corn Bites",
+                japaneseName: "れんこんコーンフライ",
+                price: 320,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80",
+                description: "Crispy tempura-style sweet corn and lotus root cakes served with creamy mint-coriander dip.",
+                flavors: ["Crunchy", "Sweet & Savory"],
+                spiceLevel: 1
+            },
+
+            // Vegetarian Table
+            {
+                id: "v1",
+                category: "veg-mains",
+                name: "Velvet Shahi Butter Paneer",
+                japaneseName: "バターパニールカレー",
+                price: 390,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80",
+                description: "Soft paneer cubes simmered in a silky tomato, cashew cream, and sun-dried fenugreek leaf gravy.",
+                flavors: ["Rich", "Creamy", "Mildly Sweet"],
+                spiceLevel: 1
+            },
+            {
+                id: "v2",
+                category: "veg-mains",
+                name: "Smoky Baingan Bharta Bistro Style",
+                japaneseName: "スモーキー茄子カレー",
+                price: 330,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+                description: "Fire-roasted eggplant mashed with caramelized onions, fresh tomatoes, coriander, and rustic hand-ground spices.",
+                flavors: ["Earthy", "Smoky", "Zesty"],
+                spiceLevel: 2
+            },
+            {
+                id: "v3",
+                category: "veg-mains",
+                name: "Matcha Infused Dal Makhani",
+                japaneseName: "抹茶ダールマッカニー",
+                price: 350,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80",
+                description: "Black lentils slow-cooked overnight on charcoal embers with butter, cream, and a subtle green tea matcha aroma.",
+                flavors: ["Deep Comfort", "Buttery", "Umami"],
+                spiceLevel: 1
+            },
+
+            // Poultry & Meats
+            {
+                id: "m1",
+                category: "meats",
+                name: "Classic Bistro Butter Chicken",
+                japaneseName: "名物バターチキン",
+                price: 460,
+                type: "non-veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=600&q=80",
+                description: "Tender tandoori chicken tikka pieces cooked in our world-famous buttery velvet tomato cashew gravy.",
+                flavors: ["Creamy", "Iconic", "Savory"],
+                spiceLevel: 1
+            },
+            {
+                id: "m2",
+                category: "meats",
+                name: "Royal Mutton Rogan Josh",
+                japaneseName: "ラムローガンジョシュ",
+                price: 540,
+                type: "non-veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1545247181-516773cae754?auto=format&fit=crop&w=600&q=80",
+                description: "Slow-cooked tender lamb chunks in a rich Kashmiri red chili, rattanjot bark, and aromatic cardamom sauce.",
+                flavors: ["Robus", "Deep Spice", "Hearty"],
+                spiceLevel: 3
+            },
+
+            // Biryani & Breads
+            {
+                id: "bb1",
+                category: "biryani-breads",
+                name: "Sealed Dum Hyderabadi Biryani",
+                japaneseName: "特製ビリヤニ",
+                price: 480,
+                type: "non-veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+                description: "Fragrant long-grain Basmati rice layered with marinated chicken/lamb, caramelized onions, saffron, and mint, sealed in clay pot.",
+                flavors: ["Aromatic", "Saffron", "Spiced"],
+                spiceLevel: 2
+            },
+            {
+                id: "bb2",
+                category: "biryani-breads",
+                name: "Flaky Garlic Butter Naan",
+                japaneseName: "ガーリックナン",
+                price: 90,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&w=600&q=80",
+                description: "Traditional leavened flatbread slapped in tandoor, brushed with rich garlic butter and fresh coriander.",
+                flavors: ["Garlicky", "Buttery", "Crispy"],
+                spiceLevel: 0
+            },
+            {
+                id: "bb3",
+                category: "biryani-breads",
+                name: "Cheese & Jalapeño Stuffed Naan",
+                japaneseName: "チーズハラペーニョナン",
+                price: 130,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80",
+                description: "Gooey mozzarella cheese and spicy chopped jalapeños stuffed inside fluffy warm tandoori bread.",
+                flavors: ["Cheesy", "Spicy", "Comfort"],
+                spiceLevel: 2
+            },
+
+            // Desserts & Sides
+            {
+                id: "ds1",
+                category: "desserts-sides",
+                name: "Sakura Gulab Jamun Parfait",
+                japaneseName: "桜グラブジャムン",
+                price: 220,
+                type: "veg",
+                isChef: true,
+                image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80",
+                description: "Warm golden milk dumplings soaked in cardamom syrup layered with pistachio ice cream and edible cherry blossom petals.",
+                flavors: ["Sweet", "Floral", "Decadent"],
+                spiceLevel: 0
+            },
+            {
+                id: "ds2",
+                category: "desserts-sides",
+                name: "Matcha & Cardamom Kulfi Pop",
+                japaneseName: "抹茶クルフィ",
+                price: 180,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
+                description: "Traditional dense Indian ice cream infused with Uji green tea and crushed almonds on a wooden stick.",
+                flavors: ["Nutty", "Cool Matcha", "Sweet"],
+                spiceLevel: 0
+            },
+            {
+                id: "ds3",
+                category: "desserts-sides",
+                name: "Cucumber Mint Raita Pot",
+                japaneseName: "キュウリライタ",
+                price: 100,
+                type: "veg",
+                isChef: false,
+                image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80",
+                description: "Chilled whipped yogurt mixed with grated English cucumber, roasted cumin powder, and fresh mint.",
+                flavors: ["Cooling", "Herbal", "Light"],
+                spiceLevel: 0
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentDietFilter = 'all'; // 'all', 'veg', 'non-veg'
+        let currentChefOnly = false;
+        let searchQuery = '';
+        let soundEnabled = true;
+
+        // Wishlist Cart State
+        let orderWishlist = {}; // { dishId: quantity }
+        let currentModalDish = null;
+        let modalQuantity = 1;
+
+        // Web Audio API Sound generator for anime cafe SFX
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    // Soft cute click
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(580, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'add') {
+                    // Kawaii item add chime
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.06); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.12); // G5
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'open') {
+                    // Soft pop opening modal
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                }
+            } catch (e) {
+                console.log("Audio play error", e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            const toggleBtn = document.getElementById('soundToggle');
+            if (soundEnabled) {
+                icon.className = "fa-solid fa-volume-high text-matcha-700";
+                toggleBtn.querySelector('span').textContent = "SFX On";
+                playSound('click');
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-cafe-light";
+                toggleBtn.querySelector('span').textContent = "SFX Off";
+            }
+        }
+
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            const emptyState = document.getElementById('emptyState');
+            container.innerHTML = '';
+
+            // Filter logic
+            const filteredDishes = menuData.filter(item => {
+                // Category filter
+                if (currentCategory !== 'all') {
+                    if (currentCategory === 'beverages' && item.category !== 'beverages') return false;
+                    if (currentCategory === 'starters' && item.category !== 'starters') return false;
+                    if (currentCategory === 'veg-mains' && item.category !== 'veg-mains') return false;
+                    if (currentCategory === 'meats' && item.category !== 'meats') return false;
+                    if (currentCategory === 'biryani-breads' && item.category !== 'biryani-breads') return false;
+                    if (currentCategory === 'desserts-sides' && item.category !== 'desserts-sides') return false;
+                }
+
+                // Diet Filter
+                if (currentDietFilter === 'veg' && item.type !== 'veg') return false;
+                if (currentDietFilter === 'non-veg' && item.type !== 'non-veg') return false;
+
+                // Chef Special filter
+                if (currentChefOnly && !item.isChef) return false;
+
+                // Search query
+                if (searchQuery.trim() !== '') {
+                    const q = searchQuery.toLowerCase();
+                    const matchName = item.name.toLowerCase().includes(q);
+                    const matchJp = item.japaneseName.toLowerCase().includes(q);
+                    const matchDesc = item.description.toLowerCase().includes(q);
+                    const matchFlavors = item.flavors.some(f => f.toLowerCase().includes(q));
+                    if (!matchName && !matchJp && !matchDesc && !matchFlavors) return false;
+                }
+
+                return true;
+            });
+
+            if (filteredDishes.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            // Group by category if viewing ALL, otherwise render direct grid
+            const categoriesMap = {
+                'beverages': '🍵 Opening Pour & Refreshing Drinks',
+                'starters': '🍢 Tandoori Specialties & Small Plates',
+                'veg-mains': '🥗 The Vegetarian Table & Curries',
+                'meats': '🍗 Poultry & Royal Meat Curries',
+                'biryani-breads': '🍛 Sealed Biryani & Artisanal Breads',
+                'desserts-sides': '🍨 Sweet Finale & Refreshing Sides'
+            };
+
+            if (currentCategory === 'all' && !searchQuery) {
+                // Group view
+                Object.keys(categoriesMap).forEach(catKey => {
+                    const catItems = filteredDishes.filter(d => d.category === catKey);
+                    if (catItems.length > 0) {
+                        const sectionEl = document.createElement('section');
+                        sectionEl.className = "space-y-4";
+                        
+                        sectionEl.innerHTML = `
+                            <div class="flex items-center space-x-3 border-b-2 border-cafe-dark/10 pb-2">
+                                <h2 class="font-display font-extrabold text-xl sm:text-2xl text-cafe-dark">${categoriesMap[catKey]}</h2>
+                                <span class="text-xs font-bold px-2.5 py-0.5 bg-matcha-100 text-matcha-700 rounded-full border border-matcha-200">
+                                    ${catItems.length} items
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                                ${catItems.map(dish => createDishCardHTML(dish)).join('')}
+                            </div>
+                        `;
+                        container.appendChild(sectionEl);
+                    }
+                });
+            } else {
+                // Single grid view
+                const sectionEl = document.createElement('section');
+                sectionEl.className = "space-y-4";
+                sectionEl.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        ${filteredDishes.map(dish => createDishCardHTML(dish)).join('')}
+                    </div>
+                `;
+                container.appendChild(sectionEl);
+            }
+
+            updateFilterIndicator();
+        }
+
+        function createDishCardHTML(dish) {
+            const isVeg = dish.type === 'veg';
+            const badgeBg = isVeg ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+            const badgeIcon = isVeg ? '🟢 Veg' : '🔴 Non-Veg';
+
+            const qtyInCart = orderWishlist[dish.id] || 0;
+
+            return `
+                <div onclick="openDishModal('${dish.id}')" 
+                    class="bg-cream-50 rounded-3xl manga-border manga-border-hover p-4 cursor-pointer flex flex-col justify-between relative group transition">
+                    
+                    ${dish.isChef ? `
+                        <div class="absolute -top-3 right-4 bg-sakura-400 text-white font-display text-[10px] font-bold px-2.5 py-0.5 rounded-full manga-border-sm z-10 shadow-sm">
+                            ★ Chef's Choice
+                        </div>
+                    ` : ''}
+
+                    <div>
+                        <!-- Image thumbnail with cute rounded frame -->
+                        <div class="relative h-44 rounded-2xl overflow-hidden mb-3 bg-cream-200 border border-cafe-dark/10">
+                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+                            
+                            <!-- Badges over image -->
+                            <div class="absolute top-2 left-2 flex gap-1">
+                                <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full border ${badgeBg} backdrop-blur-sm">
+                                    ${badgeIcon}
+                                </span>
+                            </div>
+
+                            <div class="absolute bottom-2 right-2 bg-cream-50/90 backdrop-blur px-2.5 py-0.5 rounded-xl text-[11px] font-japanese font-bold text-cafe-dark border border-cafe-dark/20">
+                                ${dish.japaneseName}
+                            </div>
+                        </div>
+
+                        <!-- Card Head -->
+                        <div class="flex justify-between items-start gap-2 mb-1">
+                            <h3 class="font-display font-bold text-lg text-cafe-dark group-hover:text-matcha-700 transition leading-snug">
+                                ${dish.name}
+                            </h3>
+                            <span class="font-display font-extrabold text-base text-sakura-500 whitespace-nowrap">
+                                ₹${dish.price}
+                            </span>
+                        </div>
+
+                        <p class="text-xs text-cafe-dark/70 line-clamp-2 mb-3 leading-relaxed font-medium">
+                            ${dish.description}
+                        </p>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="pt-2 border-t border-cream-200/80 flex items-center justify-between">
+                        <!-- Flavor Tags -->
+                        <div class="flex flex-wrap gap-1">
+                            ${dish.flavors.slice(0, 2).map(f => `<span class="text-[10px] font-semibold bg-matcha-50 text-matcha-700 px-2 py-0.5 rounded-md border border-matcha-200">${f}</span>`).join('')}
+                        </div>
+
+                        <!-- Add Button -->
+                        <button onclick="event.stopPropagation(); quickAddToCart('${dish.id}')" 
+                            class="px-3 py-1.5 bg-matcha-500 hover:bg-matcha-600 active:scale-95 text-white font-display text-xs font-bold rounded-xl manga-border-sm transition flex items-center gap-1">
+                            ${qtyInCart > 0 ? `<span>In Order (${qtyInCart})</span>` : `<i class="fa-solid fa-plus"></i> Add`}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectCategory(cat) {
+            playSound('click');
+            currentCategory = cat;
+            
+            // Update active tab styles
+            document.querySelectorAll('.cat-tab').forEach(tab => {
+                tab.className = "cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-white text-cafe-dark hover:bg-matcha-100";
+            });
+            const activeTab = document.getElementById(`cat-tab-${cat}`);
+            if (activeTab) {
+                activeTab.className = "cat-tab whitespace-nowrap px-4 py-2 rounded-2xl text-xs font-display font-bold manga-border-sm bg-matcha-500 text-white";
+            }
+
+            renderMenu();
+        }
+
+        function toggleDietFilter(type) {
+            playSound('click');
+            currentDietFilter = type;
+
+            document.querySelectorAll('.diet-btn').forEach(btn => {
+                btn.classList.remove('bg-cafe-dark', 'text-white');
+                if (!btn.className.includes('bg-white')) {
+                    btn.classList.add('bg-white');
+                }
+            });
+
+            const activeBtn = document.getElementById(`filter-diet-${type}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-cafe-dark', 'text-white');
+            }
+
+            renderMenu();
+        }
+
+        function toggleChefSpecial() {
+            playSound('click');
+            currentChefOnly = !currentChefOnly;
+            const chefBtn = document.getElementById('filter-chef');
+            if (currentChefOnly) {
+                chefBtn.classList.add('bg-amber-400', 'text-cafe-dark');
+                chefBtn.classList.remove('bg-white');
+            } else {
+                chefBtn.classList.remove('bg-amber-400');
+                chefBtn.classList.add('bg-white');
+            }
+            renderMenu();
+        }
+
+        function handleSearch() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+            searchQuery = input.value;
+
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            renderMenu();
+        }
+
+        function clearSearchInput() {
+            playSound('click');
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            searchQuery = '';
+            document.getElementById('clearSearch').classList.add('hidden');
+            renderMenu();
+        }
+
+        function resetFilters() {
+            playSound('click');
+            currentCategory = 'all';
+            currentDietFilter = 'all';
+            currentChefOnly = false;
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearch').classList.add('hidden');
+
+            selectCategory('all');
+            toggleDietFilter('all');
+            if (currentChefOnly) toggleChefSpecial();
+        }
+
+        function updateFilterIndicator() {
+            const indicator = document.getElementById('filterIndicator');
+            const text = document.getElementById('filterIndicatorText');
+
+            let activeFilters = [];
+            if (currentCategory !== 'all') activeFilters.push(`Category: ${currentCategory}`);
+            if (currentDietFilter !== 'all') activeFilters.push(`Diet: ${currentDietFilter}`);
+            if (currentChefOnly) activeFilters.push(`Chef's Specials`);
+            if (searchQuery) activeFilters.push(`Search: "${searchQuery}"`);
+
+            if (activeFilters.length > 0) {
+                indicator.classList.remove('hidden');
+                text.textContent = `Active Filters: ${activeFilters.join(' • ')}`;
+            } else {
+                indicator.classList.add('hidden');
+            }
+        }
+
+        function openDishModal(dishId) {
+            playSound('open');
+            const dish = menuData.find(d => d.id === dishId);
+            if (!dish) return;
+
+            currentModalDish = dish;
+            modalQuantity = orderWishlist[dish.id] || 1;
+
+            document.getElementById('modalImg').src = dish.image;
+            document.getElementById('modalTitle').textContent = dish.name;
+            document.getElementById('modalJapanese').textContent = dish.japaneseName;
+            document.getElementById('modalPrice').textContent = `₹${dish.price}`;
+            document.getElementById('modalDescription').textContent = dish.description;
+            document.getElementById('modalQty').textContent = modalQuantity;
+
+            // Render Badges
+            const modalBadges = document.getElementById('modalBadges');
+            modalBadges.innerHTML = `
+                <span class="text-xs font-bold px-2.5 py-1 rounded-full ${dish.type === 'veg' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'} manga-border-sm">
+                    ${dish.type === 'veg' ? '🟢 Pure Veg' : '🔴 Non-Veg'}
+                </span>
+                ${dish.isChef ? `<span class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-400 text-cafe-dark manga-border-sm">★ Chef's Special</span>` : ''}
+            `;
+
+            // Render Flavors
+            const flavorsContainer = document.getElementById('modalFlavors');
+            flavorsContainer.innerHTML = dish.flavors.map(f => `
+                <span class="bg-matcha-100 text-matcha-700 px-2 py-0.5 rounded-lg border border-matcha-300 font-bold">${f}</span>
+            `).join('');
+
+            // Render Spice Meter
+            const spiceMeter = document.getElementById('modalSpiceMeter');
+            let spiceIcons = '';
+            if (dish.spiceLevel === 0) {
+                spiceIcons = '<span class="text-emerald-600 font-bold">Mild & Gentle 🍃</span>';
+            } else {
+                for (let i = 0; i < dish.spiceLevel; i++) {
+                    spiceIcons += '🌶️ ';
+                }
+                spiceIcons += `<span class="text-xs text-cafe-light">(${dish.spiceLevel}/3)</span>`;
+            }
+            spiceMeter.innerHTML = spiceIcons;
+
+            document.getElementById('dishModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            playSound('click');
+            document.getElementById('dishModal').classList.add('hidden');
+            currentModalDish = null;
+        }
+
+        function adjustModalQty(delta) {
+            playSound('click');
+            modalQuantity = Math.max(1, modalQuantity + delta);
+            document.getElementById('modalQty').textContent = modalQuantity;
+        }
+
+        function confirmAddModalToOrder() {
+            if (!currentModalDish) return;
+            playSound('add');
+            orderWishlist[currentModalDish.id] = modalQuantity;
+            updateWishlistUI();
+            closeModal();
+            renderMenu();
+        }
+
+        function quickAddToCart(dishId) {
+            playSound('add');
+            orderWishlist[dishId] = (orderWishlist[dishId] || 0) + 1;
+            updateWishlistUI();
+            renderMenu();
+        }
+
+        function updateWishlistUI() {
+            const countEl = document.getElementById('trayCount');
+            const totalEl = document.getElementById('trayTotal');
+            const summaryEl = document.getElementById('trayItemsSummary');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+            let itemNames = [];
+
+            Object.keys(orderWishlist).forEach(id => {
+                const qty = orderWishlist[id];
+                if (qty > 0) {
+                    const dish = menuData.find(d => d.id === id);
+                    if (dish) {
+                        totalCount += qty;
+                        totalPrice += dish.price * qty;
+                        itemNames.push(`${qty}x ${dish.name}`);
+                    }
+                }
+            });
+
+            countEl.textContent = totalCount;
+            totalEl.textContent = `₹${totalPrice}`;
+
+            if (totalCount > 0) {
+                summaryEl.textContent = itemNames.join(', ');
+            } else {
+                summaryEl.textContent = "No items added yet";
+            }
+        }
+
+        function openWishlistModal() {
+            playSound('open');
+            renderOrderSummary();
+            document.getElementById('orderSummaryModal').classList.remove('hidden');
+        }
+
+        function closeOrderModal() {
+            playSound('click');
+            document.getElementById('orderSummaryModal').classList.add('hidden');
+        }
+
+        function renderOrderSummary() {
+            const listContainer = document.getElementById('orderItemsList');
+            listContainer.innerHTML = '';
+
+            let subtotal = 0;
+            const keys = Object.keys(orderWishlist).filter(k => orderWishlist[k] > 0);
+
+            if (keys.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="py-8 text-center text-cafe-light">
+                        <p class="font-display font-bold text-base">Your tray is currently empty!</p>
+                        <p class="text-xs mt-1">Add some yummy items from the menu above.</p>
+                    </div>
+                `;
+                document.getElementById('orderSubtotal').textContent = `₹0`;
+                document.getElementById('orderTax').textContent = `₹0`;
+                document.getElementById('orderGrandTotal').textContent = `₹0`;
+                return;
+            }
+
+            keys.forEach(id => {
+                const qty = orderWishlist[id];
+                const dish = menuData.find(d => d.id === id);
+                if (dish) {
+                    const lineTotal = dish.price * qty;
+                    subtotal += lineTotal;
+
+                    const itemRow = document.createElement('div');
+                    itemRow.className = "flex items-center justify-between p-2.5 bg-white rounded-2xl border border-cream-200";
+                    itemRow.innerHTML = `
+                        <div class="flex items-center space-x-2.5">
+                            <img src="${dish.image}" class="w-10 h-10 rounded-xl object-cover manga-border-sm">
+                            <div>
+                                <h4 class="font-display font-bold text-xs text-cafe-dark">${dish.name}</h4>
+                                <span class="text-[10px] text-sakura-500 font-bold">₹${dish.price} each</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeCartItemQty('${dish.id}', -1)" class="w-6 h-6 rounded-lg bg-cream-100 font-bold text-xs flex items-center justify-center text-cafe-dark hover:bg-cream-200">-</button>
+                            <span class="font-display font-bold text-xs text-cafe-dark">${qty}</span>
+                            <button onclick="changeCartItemQty('${dish.id}', 1)" class="w-6 h-6 rounded-lg bg-cream-100 font-bold text-xs flex items-center justify-center text-cafe-dark hover:bg-cream-200">+</button>
+                            <span class="font-display font-extrabold text-xs text-cafe-dark min-w-[45px] text-right">₹${lineTotal}</span>
+                        </div>
+                    `;
+                    listContainer.appendChild(itemRow);
+                }
+            });
+
+            const tax = Math.round(subtotal * 0.05);
+            const grandTotal = subtotal + tax;
+
+            document.getElementById('orderSubtotal').textContent = `₹${subtotal}`;
+            document.getElementById('orderTax').textContent = `₹${tax}`;
+            document.getElementById('orderGrandTotal').textContent = `₹${grandTotal}`;
+        }
+
+        function changeCartItemQty(dishId, delta) {
+            playSound('click');
+            const current = orderWishlist[dishId] || 0;
+            const updated = Math.max(0, current + delta);
+            if (updated === 0) {
+                delete orderWishlist[dishId];
+            } else {
+                orderWishlist[dishId] = updated;
+            }
+            updateWishlistUI();
+            renderOrderSummary();
+            renderMenu();
+        }
+
+        function sendOrderNotice() {
+            playSound('add');
+            alert("🌸 Arigatou! Your order wishlist has been submitted to the bistro kitchen!");
+            orderWishlist = {};
+            updateWishlistUI();
+            closeOrderModal();
+            renderMenu();
+        }
+
+        window.onload = function() {
+            renderMenu();
+            updateWishlistUI();
+        };
+    </script>
+</body>
+</html>
